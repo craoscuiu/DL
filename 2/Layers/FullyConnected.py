@@ -4,8 +4,11 @@ import numpy as np
 class FullyConnected:
 
     def __init__(self, input_size, output_size):
-        self.bias = np.ones((1, output_size ))
-        self.weights = np.random.rand(input_size, output_size )
+
+        self.weights_shape = (input_size, output_size)
+        self.bias_shape = (1, output_size)
+        self.weights = np.random.uniform(0,1,self.weights_shape )
+        self.bias = np.ones(self.bias_shape)
         self._optimizer = None
         self._gradient_weights = None
         self.initial_input = None
@@ -13,8 +16,8 @@ class FullyConnected:
         self.gradient_tensor = None
 
     def initialize(self, weights_initializer, bias_initializer):
-        self.weights = weights_initializer.initialize()
-        self.bias = bias_initializer.initialize()
+        self.weights = weights_initializer.initialize(self.weights_shape, self.weights_shape[0], self.weights_shape[1])
+        self.bias = bias_initializer.initialize(self.bias_shape, self.bias_shape[0], self.bias_shape[1])
 
     def forward(self,input_tensor):
         self.initial_input = input_tensor

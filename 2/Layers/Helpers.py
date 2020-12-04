@@ -36,7 +36,7 @@ def gradient_check(layers, input_tensor, label_tensor):
 
         numerical_derivative = (upper_error - lower_error) / (2 * epsilon)
 
-        # print('Analytical: ' + str(analytical_derivative) + ' vs Numerical :' + str(numerical_derivative))
+        print('Analytical: ' + str(analytical_derivative) + ' vs Numerical :' + str(numerical_derivative))
         normalizing_constant = max(np.abs(analytical_derivative), np.abs(numerical_derivative))
 
         if normalizing_constant < 1e-15:
@@ -79,6 +79,7 @@ def gradient_check_weights(layers, input_tensor, label_tensor, bias):
             analytical_derivative = layers[0].gradient_bias
         else:
             analytical_derivative = layers[0].gradient_weights
+
         analytical_derivative = analytical_derivative[it.multi_index]
 
         if bias:
@@ -101,6 +102,7 @@ def gradient_check_weights(layers, input_tensor, label_tensor, bias):
         lower_error = layers[-1].forward(minus_epsilon_activation, label_tensor)
 
         numerical_derivative = (upper_error - lower_error) / (2 * epsilon)
+        print('Analytical: ' + str(analytical_derivative) + ' vs Numerical :' + str(numerical_derivative))
         normalizing_constant = max(np.abs(analytical_derivative), np.abs(numerical_derivative))
 
         if normalizing_constant < 1e-15:
