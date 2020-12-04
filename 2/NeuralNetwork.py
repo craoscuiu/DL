@@ -37,7 +37,7 @@ class NeuralNetwork:
     def train(self, iterations):
         for i in range(iterations):
             self.loss.append(self.forward())
-
+            print(i)
             self.backward()
 
     def test(self, input_tensor ):
