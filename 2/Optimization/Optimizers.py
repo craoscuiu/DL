@@ -41,5 +41,5 @@ class Adam:
         self.v = v
         self.r = r
         self.exponent = self.exponent + 1
-
-        return weight_tensor - self.learning_rate * (v_corr /(r_corr + np.finfo(float).eps))
+        #weighted momentum in different dimensions
+        return weight_tensor - self.learning_rate * (v_corr /(np.sqrt(r_corr) + np.finfo(float).eps))
